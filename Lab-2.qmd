@@ -1,6 +1,12 @@
 ---
 title: "Minnesota Tree Growth Data"
-format: html
+author: "Avery Eastman"
+format:
+   html:
+    code-fold: true
+    toc: true
+execute:
+  echo: true
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +21,6 @@ head(tree_data)
 ### Question 1: Use glimpse to understand the structure and names of the dataset. Decribe the structure and what you see in the dataset?
 
 ```{r, message=FALSE, warning=FALSE}
-install.packages("dplyr", repos = "https://cran.rstudio.com/")
 library(dplyr)
 glimpse(tree_data)
 ```
@@ -25,7 +30,7 @@ The dataset is made up of 131,386 rows and 8 variable columns. The 8 variables n
 ### Question 2: How many records have been made in stand 1?
 
 ```{r}
-filter(tree_data, standID == 1)
+stand_1 <- filter(tree_data, standID == 1)
 ```
 
 979 records have been made in stand 1
@@ -33,7 +38,7 @@ filter(tree_data, standID == 1)
 ### Question 3: How many records of the Abies balsamea and Pinus strobus species have been made?
 
 ```{r}
-filter(tree_data, species == "ABBA" | species == "PIST")
+number_of_ABBA_and_PIST <- filter(tree_data, species == "ABBA" | species == "PIST")
 ```
 
 17,221 records of the Abies balsamea and Pinus strobus species have been made
@@ -41,7 +46,7 @@ filter(tree_data, species == "ABBA" | species == "PIST")
 ### Question 4: How many trees are older then 200 years old in the last year of the dataset?
 
 ```{r}
-filter(tree_data, age > 200, year == 2007)
+trees_200_old <- filter(tree_data, age > 200, year == 2007)
 ```
 
 In 2007, the last year of the dataset, 7 trees are older then 200 years old \### Question 5: What is the oldest tree in the dataset found using slice_max?
@@ -64,7 +69,7 @@ tree_data |>
 ### Question 7: Using slice_sample, how many trees are in a 30% sample of those recorded in 2002?
 
 ```{r}
-tree_data |>
+trees_in_30 <- tree_data |>
   filter(year == 2002) |>
   slice_sample(prop = 0.3)
 ```
@@ -269,4 +274,10 @@ slice_tail(species_growth_sum, n = 3)
 
 The 3 species with the fastest growth are PIRE, PIBA, and POTR. On the other hand, the 3 species with the slowest growth are QURU, LALA, and THOC
 
-Here is an image of each the fastest growing species: ![Pinus Banksiana species (PIBA)](/Users/Avery/github/Lab_2_tree_growth_data/images/PIBA_pinus_banksiana.png) ![Pinus Resinosa species (PIRE)](/Users/Avery/github/Lab_2_tree_growth_data/images/PIRE_pinus_resinosa.png) ![Populus Tremuloides (POTR)](/Users/Avery/github/Lab_2_tree_growth_data/images/POTR_populus_tremuloides.png)
+Here is an image of each the fastest growing species:
+
+![PIBA](images/PIBA_pinus_banksiana.png)
+
+![PIRE](images/PIRE_pinus_resinosa.png)
+
+![POTR](images/POTR_populus_tremuloides.png)
